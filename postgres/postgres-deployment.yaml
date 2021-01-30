@@ -16,8 +16,8 @@ spec:
         - name: postgres-container
           image: postgres:13.1-alpine
           imagePullPolicy: "IfNotPresent"
-          ports:
-            - containerPort: 5432
+          # ports:
+          #  - containerPort: 5432
           envFrom:
             - configMapRef:
                 name: postgres-config
