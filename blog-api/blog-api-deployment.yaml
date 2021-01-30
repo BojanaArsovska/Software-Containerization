@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blog-api-deployment
+  labels:
+    app: blog-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: blog-api
+  template:
+    metadata:
+      labels:
+        app: blog-api
+    spec:
+      containers:
+      - name: blog-api-container
+        image: localhost:32000/blog-api:v1
+        imagePullPolicy: "Always"
+        ports:
+        - containerPort: 5000
+        env:
+        - name: FLASK_ENV
+          value: "development"
+        - name: DATABASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: postgres-config
+              key: DATABASE_URL
