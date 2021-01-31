@@ -7,4 +7,4 @@ metadata:
 data:
   POSTGRES_DB: postgresdb
   POSTGRES_USER: postgresadmin
-  DATABASE_URL: "postgres://postgresadmin:admin123@10.1.56.14:5432/postgresdb"
+  DATABASE_URL: "postgres://postgresadmin:admin123@postgres-service:5432/postgresdb"
