@@ -134,7 +134,7 @@ def login():
     return custom_response({'error': 'invalid credentials'}, 400)
   ser_data = user_schema.dump(user)
   token = Auth.generate_token(ser_data['id'])
-  return custom_response({'jwt_token': token}, 200)
+  return custom_response({'jwt_token': token, 'details': 'i love cookies'}, 200)
 
   
 

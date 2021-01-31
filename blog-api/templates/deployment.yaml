@@ -42,6 +42,9 @@ spec:
               port: 5000
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          env:
+          - name: "DATABASE_URL"
+            value: "postgres://postgresadmin:admin123@blog-api-chart-postgresql:5432/postgresdb"
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

@@ -5,7 +5,7 @@ metadata:
   labels:
     app: blog-api
 spec:
-  replicas: 3
+  replicas: 5
   selector:
     matchLabels:
       app: blog-api
