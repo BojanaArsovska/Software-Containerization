@@ -130,3 +130,6 @@ our projects runs in a GCP in a compute engine
 
 navigate to blog-api/
 helm install blog-api-chart ./
+
+we used this project to setup helm in postgres:
+https://github.com/BojanaArsovska/Software-Containerization
