@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "blog-api.fullname" . }}
+  name: {{ include "rest-api-chart.fullname" . }}
   labels:
-    {{- include "blog-api.labels" . | nindent 4 }}
+    {{- include "rest-api-chart.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "blog-api.selectorLabels" . | nindent 6 }}
+      {{- include "rest-api-chart.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "blog-api.selectorLabels" . | nindent 8 }}
+        {{- include "rest-api-chart.selectorLabels" . | nindent 8 }}
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
     {{- end }}
-      serviceAccountName: {{ include "blog-api.serviceAccountName" . }}
+      serviceAccountName: {{ include "rest-api-chart.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -29,6 +29,17 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: 5000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              scheme: HTTPS
+              port: 5000
+          readinessProbe:
+            httpGet:
+              path: /
+              scheme: HTTPS
+              port: 5000
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

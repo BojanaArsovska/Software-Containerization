@@ -2,7 +2,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "blog-api.name" -}}
+{{- define "rest-api-chart.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
@@ -11,7 +11,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "blog-api.fullname" -}}
+{{- define "rest-api-chart.fullname" -}}
 {{- if .Values.fullnameOverride -}}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
@@ -27,16 +27,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "blog-api.chart" -}}
+{{- define "rest-api-chart.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 {{/*
 Common labels
 */}}
-{{- define "blog-api.labels" -}}
-helm.sh/chart: {{ include "blog-api.chart" . }}
-{{ include "blog-api.selectorLabels" . }}
+{{- define "rest-api-chart.labels" -}}
+helm.sh/chart: {{ include "rest-api-chart.chart" . }}
+{{ include "rest-api-chart.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -46,17 +46,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "blog-api.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "blog-api.name" . }}
+{{- define "rest-api-chart.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "rest-api-chart.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end -}}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "blog-api.serviceAccountName" -}}
+{{- define "rest-api-chart.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create -}}
-    {{ default (include "blog-api.fullname" .) .Values.serviceAccount.name }}
+    {{ default (include "rest-api-chart.fullname" .) .Values.serviceAccount.name }}
 {{- else -}}
     {{ default "default" .Values.serviceAccount.name }}
 {{- end -}}

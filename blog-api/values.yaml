@@ -1,4 +1,4 @@
-# Default values for blog-api.
+# Default values for rest-api-chart.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -32,7 +32,7 @@ securityContext: {}
 
 service:
   type: NodePort
-  port: 30002
+  port: 5000
 
 ingress:
   enabled: false
