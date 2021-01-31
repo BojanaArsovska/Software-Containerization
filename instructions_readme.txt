@@ -132,4 +132,4 @@ navigate to blog-api/
 helm install blog-api-chart ./
 
 we used this project to setup helm in postgres:
-https://github.com/BojanaArsovska/Software-Containerization
+https://github.com/cetic/helm-postgresql
